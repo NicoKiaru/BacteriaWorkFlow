@@ -3,7 +3,7 @@
 #@String(label="Channels, separated by ',', BF compulsory (ex : BF,Green,Red)") channelInfos
 #@Boolean(label="Correct drift") correctDrift
 #@Boolean(label="Export Data") export
-#@File(style="MicrobeJ Export Directory", required = false, style="directory" ) pathToSave
+#@File(style="Export Directory", required = false, style="directory" ) pathToSave
 #@ScriptService ss
 #@CommandService cs
 
