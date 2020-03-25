@@ -144,6 +144,9 @@ result.forEach({f ->
 measurementOrder = [:]
 idxM = -1
 
+BacteriaInfo.measureFunctions['File'] = { bact -> fileNamePrefix }
+measurementOrder[++idxM] = 'File'
+
 BacteriaInfo.measureFunctions['Index'] = { bact -> bact.idx }
 measurementOrder[++idxM] = 'Index'
 
@@ -263,7 +266,13 @@ String getBacteriaMeasures(List<BacteriaInfo> list) {
 	
 		list.each {
 			bact -> 
-			columnNames.each{measure -> str+=formatter.format(bact.values.get(measure))+"\t"}
+			columnNames.each{measure -> 
+					if (measure instanceof String) {
+						str+=bact.values.get(measure)+"\t"
+					} else {
+						str+=formatter.format(bact.values.get(measure))+"\t"
+					}
+				}
 			//bact.values.each{ k,v -> str+=formatter.format(v)+"\t"	}
 			str+="\n"
 		}
@@ -409,7 +418,7 @@ BdvHandle displayBacteria(List<BacteriaInfo> list, BdvHandle bdvh) {
 		}
 		if (chName.equals("Red")) {
 			bssf.setColor(new ARGBType(ARGBType.rgba(255,0,0,0)))
-			bssf.setDisplayRange(0,1000)
+			bssf.setDisplayRange(30,150)
 		}
 		if (chName.contains("Dots")) {
 			bssf.setColor(new ARGBType(ARGBType.rgba(255,255,0,0)))
